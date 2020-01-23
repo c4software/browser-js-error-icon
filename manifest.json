@@ -1,0 +1,23 @@
+  {
+    "name": "Error catcher icon",
+    "version": "1.0",
+    "description": "Little icon to remind you that something gone wrong on the current tab.",
+    "manifest_version": 2,
+    "background": {
+      "scripts": [
+        "background.js"
+      ],
+      "persistent": false
+    },
+    "browser_action": {
+      "browser_style": true,
+      "default_title": "ECI"
+    },
+    "permissions": [
+      "activeTab",
+      "tabs",
+      "activeTab",
+      "http://*/",
+      "https://*/"
+      ]
+  }
