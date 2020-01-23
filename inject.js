@@ -8,6 +8,12 @@ function codeToInject() {
     window.addEventListener('unhandledrejection', function(e) {
         document.dispatchEvent(new CustomEvent('ErrorToExtension', {}));
     });
+
+    var consoleErrorFunc = window.console.error;
+    window.console.error = function() {
+        consoleErrorFunc.apply(console, arguments);
+        document.dispatchEvent(new CustomEvent('ErrorToExtension', {}));
+    }
 }
 
 (function() {
