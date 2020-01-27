@@ -1,4 +1,4 @@
-# Chrome Error Icon
+# Chrome JS Error Icon
 
 Little icon to remind you that something gone wrong on the current tab.
 
