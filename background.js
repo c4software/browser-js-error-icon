@@ -1,17 +1,23 @@
+var pattern = /^((http|https):\/\/)/;
+already_injected = false;
+
 try{
   chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
-    if(tab.url.indexOf('chrome://') != -1){
+    if(already_injected || !pattern.test(tab.url)) {
+      chrome.browserAction.setBadgeText({text: "Disabled", tabId: tab.id});
       return; 
     }
-    
-    if (changeInfo.status == 'complete') {
+
+    if (changeInfo.status == 'complete' && tab.status == 'complete' && tab.url != undefined) {
       chrome.tabs.get(tabId, function(tab) {
+        already_injected = true;
         chrome.tabs.executeScript(tabId, {file: 'inject.js'});
       });
     }
   })
 } catch(err) {
   // IGNORED
+  console.log(err);
 }
 
 // accept messages from background

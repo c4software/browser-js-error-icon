@@ -1,23 +1,20 @@
-var eci_error_count = 0;
-
 function codeToInject() {
-    window.addEventListener('error', function(e) {
+    var propagateToExtension = () => {
         document.dispatchEvent(new CustomEvent('ErrorToExtension', {}));
-    });    
+    }
 
-    window.addEventListener('unhandledrejection', function(e) {
-        document.dispatchEvent(new CustomEvent('ErrorToExtension', {}));
-    });
+    window.addEventListener('error', propagateToExtension, false);    
+    window.addEventListener('unhandledrejection', propagateToExtension, false);
 
     var consoleErrorFunc = window.console.error;
-    window.console.error = function() {
+    window.console.error = () => {
         consoleErrorFunc.apply(console, arguments);
-        document.dispatchEvent(new CustomEvent('ErrorToExtension', {}));
+        propagateToExtension();
     }
 }
 
 (function() {
-    chrome.runtime.sendMessage({error: eci_error_count.toString()});
+    var eci_error_count = 0;
 
     var script = document.createElement('script');
     script.textContent = '(' + codeToInject + '())';
