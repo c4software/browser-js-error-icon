@@ -3,7 +3,12 @@ already_injected = false;
 
 try{
   chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
-    if(already_injected || !pattern.test(tab.url)) {
+
+    if(already_injected) {
+      return;
+    }
+
+    if(!pattern.test(tab.url)) {
       chrome.browserAction.setBadgeText({text: "Disabled", tabId: tab.id});
       return; 
     }
