@@ -1,10 +1,10 @@
 var pattern = /^((http|https):\/\/)/;
-already_injected = false;
+tab_already_injected = false;
 
 try{
   chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
 
-    if(already_injected) {
+    if(tab_already_injected) {
       return;
     }
 
@@ -15,7 +15,7 @@ try{
 
     if (changeInfo.status == 'complete' && tab.status == 'complete' && tab.url != undefined) {
       chrome.tabs.get(tabId, function(tab) {
-        already_injected = true;
+        tab_already_injected = true;
         chrome.tabs.executeScript(tabId, {file: 'inject.js'});
       });
     }
