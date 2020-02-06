@@ -18,15 +18,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     tabId: sender.tab.id
   });
 
-  if (request.error !== "0") {
-    chrome.browserAction.setBadgeBackgroundColor({
-      color: "#F00",
-      tabId: sender.tab.id
-    });
-  } else {
-    chrome.browserAction.setBadgeBackgroundColor({
-      color: "#585858",
-      tabId: sender.tab.id
-    });
-  }
+  browser.browserAction.setBadgeTextColor({
+    color: "#FFFFFF"
+  });
+
+  chrome.browserAction.setBadgeBackgroundColor({
+    color: "#F00",
+    tabId: sender.tab.id
+  });
 });
