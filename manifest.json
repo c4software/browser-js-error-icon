@@ -20,5 +20,5 @@
     "default_title": "Chrome JS Error Icon",
     "default_popup": "popup.html"
   },
-  "permissions": ["<all_urls>"]
+  "optional_permissions": ["<all_urls>"]
 }
