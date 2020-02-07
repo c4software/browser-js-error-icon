@@ -18,12 +18,16 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     tabId: sender.tab.id
   });
 
-  browser.browserAction.setBadgeTextColor({
-    color: "#FFFFFF"
-  });
-
   chrome.browserAction.setBadgeBackgroundColor({
     color: "#F00",
     tabId: sender.tab.id
   });
+
+  try {
+    if (chrome.browserAction.setBadgeTextColor) {
+      chrome.browserAction.setBadgeTextColor({
+        color: "#FFFFFF"
+      });
+    }
+  } catch (err) {}
 });
