@@ -1,5 +1,5 @@
 {
-  "name": "Chrome JS Error Icon",
+  "name": "Browser JS Error Icon",
   "version": "1.0",
   "description": "Little icon to remind you that something gone wrong on the current tab.",
   "manifest_version": 2,
