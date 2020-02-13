@@ -7,7 +7,7 @@ function codeToInject() {
     window.addEventListener('unhandledrejection', propagateToExtension, false);
 
     var consoleErrorFunc = window.console.error;
-    window.console.error = () => {
+    window.console.error = function() {
         consoleErrorFunc.apply(console, arguments);
         propagateToExtension();
     }
