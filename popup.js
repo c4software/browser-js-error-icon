@@ -1,14 +1,14 @@
-document.addEventListener("DOMContentLoaded", event => {
+document.addEventListener('DOMContentLoaded', function() {
   if (window.browser) {
     // Firefox
     browser.tabs
-      .query({ active: true })
-      .then(tab => browser.browserAction.getBadgeText({ tabId: tab[0].id }))
+      .query({ active: true, currentWindow: true })
+      .then(tabs => browser.action.getBadgeText({ tabId: tabs[0].id }))
       .then(drawContent);
   } else {
-    // Is chrome
-    chrome.tabs.getSelected(null, tab => {
-      chrome.browserAction.getBadgeText({ tabId: tab.id }, drawContent);
+    // Chrome
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      chrome.action.getBadgeText({ tabId: tabs[0].id }, drawContent);
     });
   }
 });

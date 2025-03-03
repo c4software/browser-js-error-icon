@@ -1,17 +1,17 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  chrome.browserAction.setBadgeText({
+  chrome.action.setBadgeText({
     text: request.error,
     tabId: sender.tab.id
   });
 
-  chrome.browserAction.setBadgeBackgroundColor({
+  chrome.action.setBadgeBackgroundColor({
     color: "#F00",
     tabId: sender.tab.id
   });
 
   try {
-    if (chrome.browserAction.setBadgeTextColor) {
-      chrome.browserAction.setBadgeTextColor({
+    if (chrome.action.setBadgeTextColor) {
+      chrome.action.setBadgeTextColor({
         color: "#FFFFFF"
       });
     }
