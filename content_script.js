@@ -1,4 +1,3 @@
-// Ce code sera exécuté dans le contexte de la page web
 (function() {
     var propagateToExtension = function() {
         document.dispatchEvent(new CustomEvent('ErrorToExtension', {}));
